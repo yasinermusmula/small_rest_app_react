@@ -17,8 +17,8 @@ export default function Post(props) {
 
     const {title, text, userId, userName} = props;
     return (
-        <div className="max-w-md m-auto  bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
-            <div className="md:flex">
+        <div className="max-w-md m-auto mt-5  bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+            <div className="md:flex ">
                 <div className="p-8">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center">
@@ -69,9 +69,12 @@ export default function Post(props) {
                                 <path fillRule="evenodd" d="M19 9.41L17.59 8 12 13.59 6.41 8 5 9.41 12 16z"
                                       clipRule="evenodd"/>
                             </svg>
+
                         </button>
                     </div>
-
+                    {expanded && (
+                        <></>
+                    )}
                 </div>
             </div>
         </div>

@@ -1,6 +1,7 @@
 import Post from "../Post/Post";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import PostForm from "../Comment/PostForm";
 
 export default function Home() {
     const [error, setError] = useState(null);
@@ -24,6 +25,7 @@ export default function Home() {
         <>
             {error && (<div>Errorr!</div>)}{!isLoaded && (<div>Loading..</div>)}
             <div>
+                <PostForm userId={2} userName={"sss"} title={"title"} text={"text"}/>
                 {postList.map(post => (
                     <Post userId={post.userId} userName={post.userName} title={post.title} text={post.text}/>
                 ))}
