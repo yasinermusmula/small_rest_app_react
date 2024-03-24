@@ -1,4 +1,5 @@
 import {React, useState, useEffect} from "react";
+import {Link} from "react-router-dom";
 
 
 export default function Post(props) {
@@ -16,9 +17,11 @@ export default function Post(props) {
                 <div className="p-8">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center">
-              <span className="inline-block h-8 w-8 rounded-full bg-red-500 flex items-center justify-center">
-                {userName.charAt(0).toUpperCase()}
-              </span>
+                            <Link
+                                to={`/users/${userId}`}
+                                className="inline-block h-8 w-8 rounded-full bg-red-500 flex items-center justify-center">
+                                {userName.charAt(0).toUpperCase()}
+                            </Link>
                             <div className="ml-2">
                                 <p className="text-left text-xl text-gray-900 font-medium">{title}</p>
 
