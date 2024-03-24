@@ -9,7 +9,7 @@ export default function Post(props) {
         SetExpanded(!expanded)
     }
 
-    const {title, text} = props;
+    const {title, text, userId, userName} = props;
     return (
         <div className="max-w-md m-auto  bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
             <div className="md:flex">
@@ -17,7 +17,7 @@ export default function Post(props) {
                     <div className="flex items-center justify-between">
                         <div className="flex items-center">
               <span className="inline-block h-8 w-8 rounded-full bg-red-500 flex items-center justify-center">
-                R
+                {userName.charAt(0).toUpperCase()}
               </span>
                             <div className="ml-2">
                                 <p className="text-left text-xl text-gray-900 font-medium">{title}</p>

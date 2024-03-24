@@ -25,7 +25,7 @@ export default function Home() {
             {error && (<div>Errorr!</div>)}{!isLoaded && (<div>Loading..</div>)}
             <div>
                 {postList.map(post => (
-                    <Post title={post.title} text={post.text}/>
+                    <Post userId={post.userId} userName={post.userName} title={post.title} text={post.text}/>
                 ))}
             </div>
         </>
