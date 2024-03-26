@@ -2,11 +2,12 @@ import {Link} from "react-router-dom";
 import {React, useState} from "react";
 import {useForm} from "react-hook-form";
 import axios from "axios";
+import {toast} from "react-toastify";
 
 
 export default function PostForm(props) {
 
-    const {userName, userId, title, text} = props
+    const {userName, userId, title, text, refreshPosts} = props
     const [textArea, SetTextArea] = useState("")
     const [titleArea, SetTitleArea] = useState("")
 
@@ -17,6 +18,10 @@ export default function PostForm(props) {
         axios.post("http://localhost:8083/api/posts/", data)
             .then((res) => {
                 console.log(res.data)
+                toast.success("Post sent it!")
+                refreshPosts();
+                SetTitleArea("")
+                SetTextArea("")
             }).catch((err) => {
             console.log(err)
         })
@@ -44,6 +49,7 @@ export default function PostForm(props) {
                             </Link>
                             <div className="mt-1 relative rounded-md shadow-sm">
                                 <input
+                                    value={titleArea}
                                     onChange={(e) => handleTitle(e.target.value)}
                                     type="text"
                                     className="ml-5 block w-full pr-10 sm:text-sm border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
@@ -54,6 +60,7 @@ export default function PostForm(props) {
                     </div>
                     <div className="mt-1 relative rounded-md shadow-sm">
                         <input
+                            value={textArea}
                             onChange={(e) => handleText(e.target.value)}
                             type="text"
                             className="block h-16 w-full pr-10 sm:text-sm border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-md"

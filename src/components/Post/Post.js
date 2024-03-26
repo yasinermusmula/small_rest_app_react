@@ -1,8 +1,11 @@
 import {React, useState, useEffect} from "react";
 import {Link} from "react-router-dom";
+import axios from "axios";
+import {toast} from "react-toastify";
 
 
 export default function Post(props) {
+    const {title, text, userId, userName, postId} = props;
 
     const [expanded, SetExpanded] = useState(false);
     const [color, SetColor] = useState(false)
@@ -15,7 +18,17 @@ export default function Post(props) {
         SetColor(!color)
     }
 
-    const {title, text, userId, userName} = props;
+    const refreshComments = (e) => {
+        e.preventDefault()
+        axios.get("http://localhost:8083/comments?postId=" + postId)
+            .then((res) => {
+                console.log(res.data)
+                toast.success("Post sent it!")
+            }).catch((err) => {
+            console.log(err)
+        })
+    }
+
     return (
         <div className="max-w-md m-auto mt-5  bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
             <div className="md:flex ">
