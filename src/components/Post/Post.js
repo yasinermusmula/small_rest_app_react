@@ -1,7 +1,9 @@
-import {React, useState, useEffect} from "react";
+import {React, useState, useEffect, useRef} from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
 import {toast} from "react-toastify";
+import Comment from "../Comment/Comment";
+import CommentForm from "../Comment/CommentPost";
 
 
 export default function Post(props) {
@@ -9,25 +11,35 @@ export default function Post(props) {
 
     const [expanded, SetExpanded] = useState(false);
     const [color, SetColor] = useState(false)
+    const [commentList, SetCommentList] = useState([])
+    const isInitialMount = useRef(true)
 
     const handleExpandedClick = () => {
         SetExpanded(!expanded)
+        refreshComments()
     }
 
     const changeLikeIconCollor = () => {
         SetColor(!color)
     }
 
-    const refreshComments = (e) => {
-        e.preventDefault()
-        axios.get("http://localhost:8083/comments?postId=" + postId)
+    const refreshComments = () => {
+        axios.get("http://localhost:8083/api/comments?postId=" + postId)
             .then((res) => {
                 console.log(res.data)
-                toast.success("Post sent it!")
+                SetCommentList(res.data)
             }).catch((err) => {
             console.log(err)
         })
     }
+
+    useEffect(() => {
+        if (isInitialMount.current) {
+            isInitialMount.current = false;
+        } else {
+            refreshComments()
+        }
+    }, []);
 
     return (
         <div className="max-w-md m-auto mt-5  bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
@@ -86,7 +98,12 @@ export default function Post(props) {
                         </button>
                     </div>
                     {expanded && (
-                        <></>
+                        <>
+                            {commentList.map(comment => (
+                                <Comment key={comment.id} userId={1} userName={"USER"} text={comment.text}/>
+                            ))}
+                            <CommentForm serId={1} userName={"USER"} text={"commentForm"}/>
+                        </>
                     )}
                 </div>
             </div>
