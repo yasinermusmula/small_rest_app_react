@@ -31,7 +31,8 @@ export default function Home() {
             <div>
                 <PostForm userId={2} userName={"sss"} refreshPosts={refreshPosts}/>
                 {postList.map(post => (
-                    <Post postId={post.id} userId={post.userId} userName={post.userName} title={post.title}
+                    <Post likes={post.postLikes} postId={post.id} userId={post.userId} userName={post.userName}
+                          title={post.title}
                           text={post.text}/>
                 ))}
             </div>
